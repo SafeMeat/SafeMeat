@@ -1,0 +1,21 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form__campo, .form__input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

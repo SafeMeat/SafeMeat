@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h3 class="main__title">Simulador financeiro</h3>
+
+        <h4 class="main__subtitle">custo invisivel do frio</h4>
+
+        <form>
+            <div class="form__campo">
+                <label for="ipt_pesoDaCarga">Peso da carga (KG)</label>
+                <label for="ipt_valorKG">Valor do KG</label>
+                <label for="ipt_custoSensor">Custo do sensor IoT (R$)</label>
+            </div>
+
+            <div class="form__input">
+                <input type="text" id="ipt_valorKG">
+                <input type="text" id="ipt_pesoDaCarga">
+                <input type="text" id="ipt_custoSensor">
+            </div>
+        </form>
+
+        <button onclick="calcular()">CALCULAR</button>
+
+        <span id="msg"></span>
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+</html>
