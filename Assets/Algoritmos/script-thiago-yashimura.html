@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .main{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calc{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 400px;
+        }
+        .btn{
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            background-color: rgb(240, 92, 23);
+            color: aliceblue;
+        }
+        h1{
+            text-align: center;
+        }
+        input{
+           padding: 10px;
+           margin-bottom: 15px; 
+           border-radius: 5px;
+           border: solid 1px,
+        }
+
+        .dados{
+            background-color: rgba(63, 63, 243, 0.89);
+            padding: 10px;
+            border-radius: 10px;
+            color: aliceblue;
+            margin-bottom: 45px;
+            text-align: center;
+            box-shadow: 0px 8px 0px 1px rgba(104, 104, 243, 0.89) ;
+        }
+
+        #res{
+            margin-top: 20px;
+            border-radius: 10px;
+            color: rgb(245, 166, 166);
+            padding: 10px 70px;
+            background-color: rgb(223, 16, 16);
+            font-size: 1.3rem;
+
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <main class="main">
+    
+        <div class="calc">
+             <h1>Calculadora Financeira</h1>
+             <p class="dados">
+                Cerca de 12% de todos os alimentos produzidos no mundo
+                 são perdidos apenas por falhas na refrigeração. (Fonte: ONU/FAO)
+            </p>
+
+            <label for="peso">Peso total da carga: (Kg)</label>
+            <input type="text" id="peso" type="number">
+
+            <label for="peso">Valor do Kg</label>
+            <input type="text" id="pKg" type="number">
+
+            <button class="btn" onclick="calcularPerdaAprox()">CALCULAR</button>
+        </div>
+       
+        <div id="res">
+           
+        </div>
+        
+    </main>
+</body>
+</html>
+
+<script>
+    function calcularPerdaAprox(){
+        let pesoCarga = peso.value
+        let valorKg = pKg.value
+
+        let valorCarga = pesoCarga * valorKg;
+
+        let perda = valorCarga * 0.12;
+        res.style.display = 'block'
+        res.innerHTML = `A perda estimada é de R$ ${perda.toFixed(2)}`  
+        }
+    
+
+
+</script>
