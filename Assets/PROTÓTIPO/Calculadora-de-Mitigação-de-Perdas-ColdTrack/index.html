@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Meat | A Integridade da Cadeia do Frio na Palma da Mão</title>
+    <meta name="description" content="Safe Meat - Monitoramento IoT inteligente para o transporte de carnes. Garantia da segurança alimentar e mitigação de perdas térmicas e desidratação.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-slate-800">
+    <!-- Splash Screen -->
+    <div id="splash" class="splash">
+        <div class="splash-bg"></div>
+        <div class="splash-content">
+            <h1 class="splash-logo"><span class="logo-safe">Safe</span><span class="logo-meat">Meat</span></h1>
+            <div class="splash-loader-container">
+                <div class="splash-loader">
+                    <div id="splash-progress" class="splash-progress"></div>
+                </div>
+                <span class="splash-text">Iniciando Telemetria IoT...</span>
+            </div>
+        </div>
+        <button id="btn-skip-splash" class="btn-skip">Pular introdução &rarr;</button>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container header-container">
+            <a href="#" class="logo-link">
+                <span class="logo-safe">Safe</span><span class="logo-meat">Meat</span>
+            </a>
+            
+            <nav class="nav-desktop">
+                <a href="#solucao" class="nav-link">Solução</a>
+                <a href="#missao" class="nav-link">Missão</a>
+                <a href="#sobre-nos" class="nav-link">Sobre Nós</a>
+                <button id="btn-open-calc-nav" class="btn-nav-calc">
+                    Simulador de ROI
+                </button>
+                <button id="btn-header-especialista" class="btn-primary">
+                    Fale com um Especialista
+                </button>
+            </nav>
+
+            <div class="nav-mobile">
+                <button id="btn-mobile-especialista" class="btn-mobile-primary">Falar</button>
+                <button id="btn-menu-toggle" class="btn-menu">☰</button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-dropdown" class="mobile-dropdown hidden">
+            <a href="#solucao" class="mobile-link" onclick="closeMenu()">Solução</a>
+            <a href="#missao" class="mobile-link" onclick="closeMenu()">Missão</a>
+            <a href="#sobre-nos" class="mobile-link" onclick="closeMenu()">Sobre Nós</a>
+            <button id="btn-mobile-calc" class="mobile-link calc-link text-left w-full">Simulador de ROI de Perdas</button>
+            <div style="padding: 1rem 0;">
+                <button id="btn-mobile-specialist-menu" class="btn-primary" style="width: 100%;">Fale com um Especialista</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="hidden-fade">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-bg"></div>
+            <div class="container hero-container">
+                <div class="badge">Plataforma IoT de Segurança Alimentar B2B</div>
+                <h1 class="hero-title">A Integridade da Cadeia do Frio <span class="text-gradient">na Palma da Mão.</span></h1>
+                <p class="hero-subtitle">Monitoramento IoT inteligente para o transporte de carnes.</p>
+                <p class="hero-desc">Telemetria de alta precisão em tempo real e inteligência preditiva contra quebras térmicas e perdas por desidratação hídrica.</p>
+                <div class="hero-buttons">
+                    <button id="btn-hero-solucao" class="btn-primary btn-large">Conheça a Solução &rarr;</button>
+                    <button id="btn-hero-apresentacao" class="btn-secondary btn-large">▶ Ver Apresentação</button>
+                </div>
+                
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <div class="metric-val text-cyan">0°C a 4°C</div>
+                        <div class="metric-label">Faixa Crítica Segura</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-val text-white">15s</div>
+                        <div class="metric-label">Telemetria Contínua</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-val text-cyan">100%</div>
+                        <div class="metric-label">Conformidade MAPA</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-val text-emerald">45 min</div>
+                        <div class="metric-label">Alerta Preventivo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section id="missao" class="section bg-white">
+            <div class="container text-center">
+                <div class="badge-light mb-m">Propósito Institucional</div>
+                <blockquote class="mission-quote">
+                    <span class="text-blue-dark font-bold">Nossa Missão:</span> Garantir a segurança alimentar e mitigar os riscos financeiros do transporte logístico através de telemetria ininterrupta e auditoria confiável, blindando a reputação das marcas produtoras.
+                </blockquote>
+                <div class="divider"></div>
+                
+                <div class="grid-3 text-left">
+                    <div class="card card-light">
+                        <div class="card-icon bg-blue-light text-blue">🛡</div>
+                        <h3 class="mb-s">Segurança Alimentar Rigorosa</h3>
+                        <p class="text-small text-gray">Proteção microbiológica da proteína animal da origem ao destino, assegurando que o consumidor receba produtos frescos e no padrão sanitário máximo.</p>
+                    </div>
+                    <div class="card card-light">
+                        <div class="card-icon bg-cyan-light text-cyan-dark">📉</div>
+                        <h3 class="mb-s">Mitigação de Perdas Financeiras</h3>
+                        <p class="text-small text-gray">Eliminação do desperdício invisível com alertas preditivos que antecipam desvios de temperatura e desidratação antes que ocorra a quebra de valor da carga.</p>
+                    </div>
+                    <div class="card card-light">
+                        <div class="card-icon bg-indigo-light text-indigo">🏅</div>
+                        <h3 class="mb-s">Blindagem de Reputação</h3>
+                        <p class="text-small text-gray">Trilhas de auditoria criptografadas e dados imutáveis que garantem compliance inquestionável perante frigoríficos, transportadoras e varejistas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Do Section -->
+        <section id="solucao" class="section bg-slate">
+            <div class="container">
+                <div class="text-center section-header">
+                    <div class="badge-light badge-blue mb-s">Engenharia de Soluções</div>
+                    <h2 class="section-title">O Que Fazemos</h2>
+                    <p class="section-desc">Tecnologia de hardware dedicada e plataforma em nuvem para monitorar parâmetros higrotérmicos críticos no transporte frigorificado de carnes.</p>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="card card-white flex-col">
+                        <div class="card-top">
+                            <div class="card-icon bg-blue-light text-blue">⚙</div>
+                            <span class="card-badge bg-cyan-light text-cyan">LTE-M + BLE</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="mb-s">Monitoramento IoT Contínuo</h3>
+                            <p class="text-small text-gray mb-m">Sensores de precisão na cabine e no baú medindo temperatura (0°C a 4°C) em tempo real.</p>
+                            <ul class="card-list">
+                                <li><span class="text-cyan mr-s">✓</span> Calibração específica para proteína animal</li>
+                                <li><span class="text-cyan mr-s">✓</span> Precisão micrométrica de ±0.1°C</li>
+                                <li><span class="text-cyan mr-s">✓</span> Bateria autônoma de longa duração (até 7 dias)</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <span>Hardware de Baú Frigorífico</span>
+                            <span class="text-blue font-bold">Conectar &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div class="card card-white flex-col">
+                        <div class="card-top">
+                            <div class="card-icon bg-cyan-light text-cyan-dark">📊</div>
+                            <span class="card-badge bg-amber-light text-amber">Alertas Preditivos</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="mb-s">Dashboard de Controle</h3>
+                            <p class="text-small text-gray mb-m">Visibilidade total da carga e alertas preditivos para evitar perdas antes que aconteçam.</p>
+                            <ul class="card-list">
+                                <li><span class="text-cyan mr-s">✓</span> Notificação preventiva 45 min antes da quebra</li>
+                                <li><span class="text-cyan mr-s">✓</span> Telemetria em mapa com geolocalização</li>
+                                <li><span class="text-cyan mr-s">✓</span> Monitoramento térmico e hídrico unificado</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <span>Gestão de Frota Web/Mobile</span>
+                            <span class="text-blue font-bold">Visualizar &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div class="card card-white flex-col">
+                        <div class="card-top">
+                            <div class="card-icon bg-gray-light text-gray-dark">💾</div>
+                            <span class="card-badge bg-emerald-light text-emerald">Auditoria 100%</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="mb-s">Armazenamento e Compliance</h3>
+                            <p class="text-small text-gray mb-m">Retenção segura de dados via Edge Computing para auditorias rigorosas e rastreabilidade total.</p>
+                            <ul class="card-list">
+                                <li><span class="text-cyan mr-s">✓</span> Memória interna sem sinal de operadora</li>
+                                <li><span class="text-cyan mr-s">✓</span> Laudos automáticos para fiscalização (MAPA)</li>
+                                <li><span class="text-cyan mr-s">✓</span> Trilha de auditoria criptografada imutável</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <span>Edge Computing Resiliente</span>
+                            <span class="text-blue font-bold">Auditar &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-banner">
+                    <div class="cta-content">
+                        <div class="cta-subtitle">Calculadora de Mitigação Financeira Integrada</div>
+                        <h4 class="cta-title">Deseja simular o valor exato que sua operação economizará?</h4>
+                        <p class="text-small">Nossa ferramenta calcula instantaneamente o desperdício evitado pela redução da quebra térmica de 12% e da desidratação hídrica de 2% no frete.</p>
+                    </div>
+                    <button id="btn-banner-calc" class="btn-cyan">Simular Minha Carga &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="sobre-nos" class="section bg-light-gray">
+            <div class="container text-center">
+                <div class="badge-light badge-gray mb-m">Quem Somos</div>
+                <h2 class="section-title">Sobre Nós</h2>
+                
+                <div class="about-card">
+                    <div class="about-icon text-cyan">🎓</div>
+                    <p class="about-text">Somos uma equipe multidisciplinar de estudantes de Análise e Desenvolvimento de Sistemas. Focados em criar arquiteturas robustas de back-end, computação em nuvem e soluções IoT, nascemos para resolver os gargalos reais do setor logístico com tecnologia de ponta, unindo aprendizado acadêmico e visão de mercado.</p>
+                    
+                    <div class="grid-4 mt-l about-grid">
+                        <div class="competence">
+                            <div class="comp-icon text-blue mb-s">{"{ }"}</div>
+                            <strong class="d-block text-small">Back-end Resiliente</strong>
+                            <span class="text-xs text-gray">APIs críticas & telemetria</span>
+                        </div>
+                        <div class="competence">
+                            <div class="comp-icon text-cyan mb-s">☁</div>
+                            <strong class="d-block text-small">Nuvem & Escalabilidade</strong>
+                            <span class="text-xs text-gray">Sistemas distribuídos</span>
+                        </div>
+                        <div class="competence">
+                            <div class="comp-icon text-indigo mb-s">🖧</div>
+                            <strong class="d-block text-small">Hardware & IoT</strong>
+                            <span class="text-xs text-gray">Sensores e telemetria Edge</span>
+                        </div>
+                        <div class="competence">
+                            <div class="comp-icon text-gray-dark mb-s">🏢</div>
+                            <strong class="d-block text-small">Visão de Mercado B2B</strong>
+                            <span class="text-xs text-gray">Logística da cadeia fria</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid pb-l mb-l border-b-dark">
+                <div class="footer-col-2">
+                    <a href="#" class="logo-link mb-m d-inline-block">
+                        <span class="logo-safe text-white">Safe</span><span class="logo-meat">Meat</span>
+                    </a>
+                    <p class="text-small mb-m">Tecnologia IoT de ponta para a cadeia do frio de carnes. Segurança alimentar, integridade e mitigação de perdas logísticas em cada quilômetro.</p>
+                    <div class="footer-actions flex gap-s">
+                        <a href="mailto:contato@safemeat.com.br" class="btn-outline text-xs">✉ contato@safemeat.com.br</a>
+                        <button id="btn-replay-splash" class="btn-outline text-xs">↻ Replay Splash</button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Navegação</h4>
+                    <ul class="footer-list">
+                        <li><a href="#solucao">Nossa Solução</a></li>
+                        <li><a href="#missao">Nossa Missão</a></li>
+                        <li><a href="#sobre-nos">Sobre Nós</a></li>
+                        <li><button id="btn-footer-especialista" class="text-btn">Fale com um Especialista</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Institucional</h4>
+                    <ul class="footer-list">
+                        <li><a href="https://linkedin.com">LinkedIn do Projeto</a></li>
+                        <li><button id="btn-footer-terms" class="text-btn">Termos de Uso</button></li>
+                        <li><button id="btn-footer-privacy" class="text-btn">Política de Privacidade</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom flex justify-between items-center text-xs">
+                <p>© 2026 Safe Meat. Todos os direitos reservados.</p>
+                <div class="footer-bottom-right flex items-center gap-m">
+                    <span class="hidden-mobile">Projeto Acadêmico ADS • Tecnologia e Segurança Alimentar</span>
+                    <button id="btn-scroll-top" class="btn-icon">↑</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (Hidden by default) -->
+    
+    <!-- Specialist Modal -->
+    <div id="modal-specialist" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-dark text-white p-l relative">
+                <button class="btn-close text-gray hover-white absolute top-right-m">✕</button>
+                <h4 class="text-cyan text-xs font-bold uppercase mb-xs">Consultoria Técnica B2B</h4>
+                <h3 class="text-l font-bold mb-xs">Fale com um Especialista Safe Meat</h3>
+                <p class="text-xs text-gray-light">Descubra como nossa telemetria IoT elimina perdas térmicas na sua operação de transporte frigorífico.</p>
+            </div>
+            <div class="modal-body p-l">
+                <div id="specialist-success" class="hidden text-center py-l">
+                    <div class="success-icon mb-m">✓</div>
+                    <h3 class="text-l font-bold mb-s">Solicitação Recebida com Sucesso!</h3>
+                    <p class="text-small text-gray mb-l">Obrigado pelo contato, <strong id="success-name"></strong>. Nossa equipe de engenharia e consultoria logística entrará em contato com você pelo e-mail <strong id="success-email"></strong> em até 2 horas úteis.</p>
+                    <button id="btn-specialist-close" class="btn-primary">Concluir</button>
+                </div>
+                <form id="form-specialist">
+                    <div class="grid-2 gap-m mb-m">
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">Nome Completo *</label>
+                            <input type="text" id="spec-name" required placeholder="Ex: Carlos Eduardo" class="form-input">
+                        </div>
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">E-mail Corporativo *</label>
+                            <input type="email" id="spec-email" required placeholder="nome@empresa.com.br" class="form-input">
+                        </div>
+                    </div>
+                    <div class="grid-2 gap-m mb-m">
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">Nome da Empresa *</label>
+                            <input type="text" required placeholder="Ex: Frigorífico Vale do Frio" class="form-input">
+                        </div>
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">Telefone / WhatsApp</label>
+                            <input type="tel" placeholder="(11) 99999-9999" class="form-input">
+                        </div>
+                    </div>
+                    <div class="grid-2 gap-m mb-m">
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">Perfil da Empresa</label>
+                            <select class="form-input">
+                                <option>Frigorífico / Indústria</option>
+                                <option>Transportadora Frigorífica</option>
+                                <option>Operador Logístico 3PL</option>
+                                <option>Rede Varejista / Supermercado</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block">Volume da Frota</label>
+                            <select class="form-input">
+                                <option>1 a 10 caminhões</option>
+                                <option>11 a 50 caminhões</option>
+                                <option>Mais de 50 caminhões</option>
+                                <option>Rotas terceirizadas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group mb-l">
+                        <label class="font-bold text-xs mb-xs block">Mensagem (Opcional)</label>
+                        <textarea rows="2" placeholder="Conte-nos brevemente suas rotas ou desafios atuais..." class="form-input"></textarea>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-emerald">🔒 Seus dados são protegidos sob sigilo comercial.</span>
+                        <button type="submit" class="btn-primary">Enviar Solicitação &rarr;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Presentation Modal -->
+    <div id="modal-presentation" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header-simple bg-dark text-white p-m flex justify-between items-center border-b-dark">
+                <div class="flex items-center gap-s">
+                    <span class="logo-safe text-white">Safe</span><span class="logo-meat">Meat</span>
+                    <span class="text-cyan text-xs font-mono pl-s border-l-dark hidden-mobile">Pitch Executivo B2B</span>
+                </div>
+                <button class="btn-close text-gray hover-white">✕</button>
+            </div>
+            <div class="modal-body p-l flex-col justify-between" style="min-height: 340px;">
+                <div class="slides-container">
+                    <div class="slide active" id="slide-0">
+                        <div class="flex items-center gap-m mb-m">
+                            <div class="icon-box bg-light-gray p-s radius-m">🛡</div>
+                            <div>
+                                <span class="text-cyan text-xs font-bold font-mono uppercase d-block mb-xs">Slide 1 de 4</span>
+                                <h3 class="text-l font-bold">O Desafio Crítico no Transporte de Proteína Animal</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray font-bold mb-m">Perdas invisíveis que corroem as margens de frigoríficos e distribuidores</p>
+                        <p class="text-small mb-m">No Brasil, estatísticas logísticas comprovam que aproximadamente <strong>12% dos alimentos perecíveis</strong> sofrem perdas durante o frete por falhas e quebras térmicas.</p>
+                        <div class="grid-2 gap-s">
+                            <div class="card-red">
+                                <h4 class="text-l font-mono text-red font-black mb-xs">12% Perda Térmica</h4>
+                                <p class="text-xs text-gray-dark">Descarte total ou desclassificação sanitária de cortes nobres por flutuação térmica acima de 4°C.</p>
+                            </div>
+                            <div class="card-amber">
+                                <h4 class="text-l font-mono text-amber font-black mb-xs">2% Quebra Hídrica</h4>
+                                <p class="text-xs text-gray-dark">Desidratação e perda de peso da carne resfriada quando a umidade e a ventilação do baú descalibram.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide hidden" id="slide-1">
+                        <div class="flex items-center gap-m mb-m">
+                            <div class="icon-box bg-light-gray p-s radius-m">⚙</div>
+                            <div>
+                                <span class="text-cyan text-xs font-bold font-mono uppercase d-block mb-xs">Slide 2 de 4</span>
+                                <h3 class="text-l font-bold">A Resposta Tecnológica: Dispositivo IoT Safe Meat</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray font-bold mb-m">Sensores de alta precisão em pontos estratégicos da carga frigorificada</p>
+                        <ul class="slide-list text-small space-y-s">
+                            <li><strong class="text-cyan">✓ Monitoramento Contínuo (0°C a 4°C):</strong> Leitura calibrada para carne resfriada e temperaturas negativas para congelados.</li>
+                            <li><strong class="text-cyan">✓ Telemetria a Cada 15 Segundos:</strong> Envio de pulsos higrotérmicos via rede de celular industrial (LTE-M / NB-IoT).</li>
+                            <li><strong class="text-cyan">✓ Alertas Preditivos:</strong> Notificação automática ao motorista e à central 45 minutos antes do ponto crítico.</li>
+                        </ul>
+                    </div>
+
+                    <div class="slide hidden" id="slide-2">
+                        <div class="flex items-center gap-m mb-m">
+                            <div class="icon-box bg-light-gray p-s radius-m">💾</div>
+                            <div>
+                                <span class="text-cyan text-xs font-bold font-mono uppercase d-block mb-xs">Slide 3 de 4</span>
+                                <h3 class="text-l font-bold">Arquitetura Edge Computing e Compliance</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray font-bold mb-m">Segurança absoluta de dados mesmo em trechos remotos sem sinal de telefonia</p>
+                        <div class="card-gray-bg p-m radius-m">
+                            <p class="text-small mb-s"><strong>Buffer Local Criptografado de até 30 dias de viagem</strong><br>
+                            <span class="text-gray-dark">Sincronização imediata em lote assim que o veículo atinge cobertura de rede.</span></p>
+                            <p class="text-small"><strong>Laudo Sanitário Digital Instantâneo</strong><br>
+                            <span class="text-gray-dark">Relatório de conformidade auditável para fiscais do MAPA e SIF no momento do recebimento.</span></p>
+                        </div>
+                    </div>
+
+                    <div class="slide hidden" id="slide-3">
+                        <div class="flex items-center gap-m mb-m">
+                            <div class="icon-box bg-light-gray p-s radius-m">📈</div>
+                            <div>
+                                <span class="text-cyan text-xs font-bold font-mono uppercase d-block mb-xs">Slide 4 de 4</span>
+                                <h3 class="text-l font-bold">Impacto Financeiro e Blindagem de Marca</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray font-bold mb-m">O ROI da mitigação de riscos e a preservação do valor da sua proteína</p>
+                        <div class="card-emerald p-m radius-m mb-l">
+                            <h4 class="text-xs font-bold uppercase text-emerald-dark mb-xs">Economia Imediata no Primeiro Mês</h4>
+                            <p class="text-xs text-emerald-dark">Ao interceptar a falha do compressor ou o desligamento indevido do motor frigorífico em tempo hábil, a Safe Meat se paga já na primeira ocorrência mitigada.</p>
+                        </div>
+                        <div class="text-center">
+                            <button id="btn-slide-calc" class="btn-primary-dark">Calcular Economia da Minha Carga &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-l pt-m border-t-light">
+                    <div class="slide-dots flex gap-xs" id="slide-dots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="flex gap-s">
+                        <button id="btn-prev-slide" class="btn-outline px-m" disabled>⟨</button>
+                        <button id="btn-next-slide" class="btn-primary-dark">Próximo ⟩</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculator Modal -->
+    <div id="modal-calculator" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header-simple bg-dark text-white p-m flex justify-between items-center border-b-dark">
+                <div class="flex items-center gap-s">
+                    <div class="icon-box bg-cyan-dark text-cyan p-xs radius-s">🖩</div>
+                    <div>
+                        <h3 class="text-small font-bold">Simulador Financeiro de Mitigação de Perdas</h3>
+                        <p class="text-xs text-gray font-normal">Regra de negócio Safe Meat: 12% falha térmica evitada + 2% desidratação hídrica</p>
+                    </div>
+                </div>
+                <button class="btn-close text-gray hover-white">✕</button>
+            </div>
+            <div class="modal-body p-m bg-light-gray">
+                <div class="grid-2 gap-l calc-layout">
+                    <!-- Calculator Inputs -->
+                    <div class="bg-white p-m radius-m border-light shadow-sm">
+                        <h3 class="text-small font-bold mb-m flex items-center gap-s">
+                            <span class="text-blue">⚙</span> Parâmetros da Carga e Rota
+                        </h3>
+                        
+                        <div class="input-group mb-m">
+                            <label class="font-bold text-xs mb-xs block text-gray-dark">1. Tipo de Proteína Animal</label>
+                            <select id="calc-tipo-carne" class="form-input">
+                                <option value="Bovina">Carne Bovina (R$ 32,00/kg)</option>
+                                <option value="Suína">Carne Suína (R$ 18,00/kg)</option>
+                                <option value="Aves">Aves (R$ 11,00/kg)</option>
+                                <option value="Outros">Outros / Mix (R$ 20,00/kg)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group mb-m">
+                            <label class="font-bold text-xs mb-xs block text-gray-dark">2. Condição de Transporte</label>
+                            <div class="flex gap-m">
+                                <label class="radio-label flex items-center gap-xs text-small"><input type="radio" name="transporte" value="Resfriada" checked> Resfriada (0°C a 4°C)</label>
+                                <label class="radio-label flex items-center gap-xs text-small"><input type="radio" name="transporte" value="Congelada"> Congelada (-18°C)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group mb-m">
+                            <div class="flex justify-between items-center mb-xs">
+                                <label class="font-bold text-xs text-gray-dark">3. Peso Total da Carga no Baú</label>
+                                <span id="calc-peso-display" class="font-mono text-small text-blue font-bold bg-blue-light px-s py-xs radius-s border-blue-light">20.000 kg</span>
+                            </div>
+                            <input type="range" id="calc-peso-range" min="1000" max="35000" step="500" value="20000" class="w-full mt-s">
+                            <div class="flex justify-between text-xs text-gray mt-xs">
+                                <span>1t</span>
+                                <span>35t</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="font-bold text-xs mb-xs block text-gray-dark">4. Média de Viagens Mensais por Caminhão</label>
+                            <input type="number" id="calc-viagens" value="4" min="1" max="30" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <!-- Calculator Results -->
+                    <div>
+                        <!-- Total -->
+                        <div class="bg-emerald-dark text-white p-l radius-m text-center mb-m shadow-emerald">
+                            <span class="text-xs font-bold uppercase tracking-wide text-emerald-light block mb-s">Desperdício Mitigado Estimado (Por Viagem)</span>
+                            <div id="calc-total" class="text-xxl font-black mb-s">R$ 0,00</div>
+                            <span id="calc-total-desc" class="text-xs text-emerald-light bg-emerald p-xs radius-s inline-block">14% de proteção combinada sobre o valor total</span>
+                        </div>
+                        
+                        <!-- Detalhamento -->
+                        <div id="resfriada-details" class="grid-2 gap-m mb-m">
+                            <div class="bg-white p-m radius-m border-amber-light text-center relative overflow-hidden">
+                                <div class="absolute-top-bar bg-amber"></div>
+                                <span class="text-xs font-bold uppercase text-amber block mb-s pt-s">Falha Térmica Evitada</span>
+                                <div id="calc-perda-frio" class="text-l font-black text-amber-dark mb-xs">R$ 0,00</div>
+                                <span class="text-xs text-gray">12,0% risco térmico mitigado</span>
+                            </div>
+                            <div class="bg-white p-m radius-m border-cyan-light text-center relative overflow-hidden">
+                                <div class="absolute-top-bar bg-cyan"></div>
+                                <span class="text-xs font-bold uppercase text-cyan block mb-s pt-s">Quebra Hídrica Mitigada</span>
+                                <div id="calc-perda-agua" class="text-l font-black text-cyan-dark mb-xs">R$ 0,00</div>
+                                <span class="text-xs text-gray">2,0% da carga evaporada</span>
+                            </div>
+                        </div>
+
+                        <div id="congelada-details" class="bg-light-gray p-m radius-m border-light mb-m hidden">
+                            <h4 class="text-small font-bold mb-xs">Carga Congelada (-18°C)</h4>
+                            <p class="text-xs text-gray">Mesmo congelada, a quebra de 2% por sublimação e formação de escarcha foi calculada. A integridade do invólucro e temperatura estável mantêm o valor nominal.</p>
+                        </div>
+                        
+                        <!-- Projeções -->
+                        <div class="grid-2 gap-s">
+                            <div class="bg-white p-m radius-m border-light">
+                                <span class="text-xs font-bold text-emerald flex items-center gap-xs mb-xs">↗ Projeção Mensal (<span id="calc-viagens-label">4</span> v.)</span>
+                                <div id="calc-mensal" class="text-l font-bold">R$ 0,00</div>
+                            </div>
+                            <div class="bg-white p-m radius-m border-light">
+                                <span class="text-xs font-bold text-blue flex items-center gap-xs mb-xs">📊 Projeção Anual</span>
+                                <div id="calc-anual" class="text-l font-bold text-blue">R$ 0,00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Modals (Terms & Privacy) -->
+    <div id="modal-text" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header-simple bg-dark text-white p-m flex justify-between items-center border-b-dark">
+                <h3 id="modal-text-title" class="text-small font-bold">Título</h3>
+                <button class="btn-close text-gray hover-white">✕</button>
+            </div>
+            <div id="modal-text-body" class="modal-body p-l text-xs text-gray-dark space-y-m" style="max-height: 60vh; overflow-y: auto;">
+                <!-- content -->
+            </div>
+            <div class="p-m bg-light-gray border-t-light text-right">
+                <button class="btn-primary-dark btn-close-text">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
