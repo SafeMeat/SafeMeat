@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <h1>
+        Simulação Financeira
+    </h1>
+
+    <label for="ipt_lote">Informe o tamanho do Lote em kg:</label>
+    <input type="text" id="ipt_lote"> <br><br>
+    <label for="ipt_valorMedio">Informe o Valor Médio:</label>
+    <input type="text" id="ipt_valorMedio" placeholder="R$ 25/kg"> <br><br>
+
+    <button onclick="simular()">Ver Simulação</button>
+
+    <div id="div_msg"></div>
+
+</body>
+
+</html>
+<script>
+    function simular() {
+        let lote = Number(ipt_lote.value);
+        let valorMedio = Number(ipt_valorMedio.value);
+
+        // valor total da carga
+        let valorTotal = lote * valorMedio;
+
+        // prejuízo se NÃO houver monitoramento (FAO, 2016 - 20% de perda na cadeia)
+        let prejuizo = valorTotal * 0.20;
+
+        // quanto o sensor evita desse prejuízo (estudo de caso - 30% de redução)
+        let economiaSensor = prejuizo * 0.30;
+
+        // quanto ainda se perde MESMO com o sensor funcionando
+        let prejuizoComSensor = prejuizo - economiaSensor;
+
+        // valor final do lote em cada cenário
+        let valorSemMonitoramento = valorTotal - prejuizo;
+        let valorComMonitoramento = valorTotal - prejuizoComSensor;
+
+        div_msg.innerHTML = `
+        O valor total da carga é de R$ ${valorTotal.toFixed(2)}.<br>
+        Sem monitoramento, o prejuízo estimado é de R$ ${prejuizo.toFixed(2)},
+        restando um valor de R$ ${valorSemMonitoramento.toFixed(2)}.<br>
+        Com o sensor da SafeMeat, R$ ${economiaSensor.toFixed(2)} desse prejuízo é evitado,
+        restando uma perda de apenas R$ ${prejuizoComSensor.toFixed(2)}
+        e um valor final de R$ ${valorComMonitoramento.toFixed(2)}.
+    `;
+    }
+
+</script>
