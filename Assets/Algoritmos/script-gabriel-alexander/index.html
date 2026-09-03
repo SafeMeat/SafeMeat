@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Mitigação de Perdas ColdTrack</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="font-sans text-slate-800">
+  <!-- Barra de Navegação Superior -->
+  <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Marca / Identidade do ColdTrack -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-blue-500/20">
+            <i data-lucide="snowflake" class="w-6 h-6 text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-black text-lg tracking-tight text-white">ColdTrack IoT</span>
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-400 px-1-5 py-0-5 rounded border border-blue-500/40">
+                Cadeia do Frio
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">
+              Dispositivo Preditivo de Monitoramento Logístico
+            </p>
+          </div>
+        </div>
+
+        <!-- Abas de Navegação Principal -->
+        <nav class="hidden md:flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60">
+          <button id="tab-nav-calculadora"
+            class="flex items-center gap-2 px-3-5 py-1-5 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white shadow-xs">
+            <i data-lucide="calculator" class="w-3-5 h-3-5"></i>
+            Calculadora de Mitigação de Perdas
+          </button>
+          <button id="tab-nav-telemetria"
+            class="flex items-center gap-2 px-3-5 py-1-5 rounded-lg text-xs font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-700/50">
+            <i data-lucide="truck" class="w-3-5 h-3-5"></i>
+            Telemetria de Frota & Alertas
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          </button>
+        </nav>
+
+        <!-- Perfil & Status -->
+        <div class="flex items-center gap-3">
+          <div
+            class="hidden sm:flex items-center gap-2 px-3 py-1-5 rounded-full bg-slate-800/70 border border-slate-700/60 text-xs text-slate-300">
+            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span>Sensores LTE-M</span>
+          </div>
+          <div class="flex items-center gap-2-5 pl-2 border-l border-slate-800">
+            <div
+              class="w-8 h-8 rounded-full bg-blue-600/30 border border-blue-500/40 text-blue-400 flex items-center justify-center font-bold text-xs">
+              TE
+            </div>
+            <div class="hidden lg:block text-left text-xs leading-tight">
+              <span class="font-semibold text-slate-200 block">Transportes Exemplo</span>
+              <span class="text-[11px] text-slate-400">Gestor de Frota</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Navegação Mobile -->
+    <div class="md:hidden flex border-t border-slate-800 bg-slate-900/95 px-4 py-2 gap-2">
+      <button id="tab-nav-mobile-calculadora"
+        class="flex-1 py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1-5 bg-blue-600 text-white">
+        <i data-lucide="calculator" class="w-3-5 h-3-5"></i>
+        Calculadora
+      </button>
+      <button id="tab-nav-mobile-telemetria"
+        class="flex-1 py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1-5 text-slate-400 bg-slate-800">
+        <i data-lucide="truck" class="w-3-5 h-3-5"></i>
+        Frota IoT
+        <span class="w-1-5 h-1-5 rounded-full bg-amber-400"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+
+    <!-- CONTEÚDO CALCULADORA -->
+    <div id="secao-calculadora" class="space-y-6">
+
+      <!-- Banner de Contexto Operacional -->
+      <div
+        class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span
+              class="inline-flex items-center px-2-5 py-0-5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+              Regra de Negócio Homologada
+            </span>
+            <span
+              class="inline-flex items-center gap-1-5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0-5 rounded-md border border-emerald-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Cálculo Local Instantâneo
+            </span>
+          </div>
+          <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-1-5">
+            Calculadora Financeira de Mitigação de Perdas Logísticas
+          </h1>
+          <p class="text-sm text-slate-600 mt-0-5">
+            Calcule o desperdício evitado pela adoção do dispositivo preditivo ColdTrack IoT na cadeia de transporte
+            frigorífico.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 self-stretch md:self-auto">
+          <button id="btn-redefinir"
+            class="px-3 py-2 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1-5">
+            <i data-lucide="rotate-ccw" class="w-3-5 h-3-5"></i>
+            Redefinir
+          </button>
+          <button id="btn-info-tecnica"
+            class="px-3 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors flex items-center gap-1-5 border border-blue-200">
+            <i data-lucide="help-circle" class="w-3-5 h-3-5"></i>
+            <span id="label-info-tecnica">Parâmetros & Fontes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Caixa Expansível de Fontes e Regras -->
+      <div id="caixa-info-tecnica"
+        class="hidden bg-slate-900 text-slate-100 rounded-xl p-5 shadow-md border border-slate-800 text-sm">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <h4 class="font-semibold text-white flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+            Premissas Científicas e Normativas dos Cálculos
+          </h4>
+          <span class="text-xs text-slate-400">Diretrizes Logísticas & Agropecuárias</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+          <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">
+              Passo 2: Falha Térmica (12%)
+            </span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Estatísticas logísticas globais e nacionais confirmam que <strong>12% dos alimentos</strong> transportados
+              sofrem descarte ou depreciação severa exclusivamente pela perda de controle térmico da carga.
+            </p>
+          </div>
+          <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block mb-1">
+              Passo 3: Desidratação / Umidade (2%)
+            </span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Média segura de <strong>2% de perda de massa por evaporação</strong> (faixa de 1% a 3%, somando 0,7%–1,5%
+              em câmara inicial com até 1% em estocagem/transporte prolongado fora do ponto de orvalho ótimo).
+            </p>
+          </div>
+          <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">
+              Mitigação Preditiva IoT
+            </span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              O sensor IoT com algoritmo preditivo antecipa anomalias higrotérmicas em até <strong>45 minutos</strong>
+              antes do ponto de dano celular, viabilizando intervenção e salvando integralmente essa margem.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Principal -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- COLUNA 1: ENTRADAS -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="scale" class="w-5 h-5 text-blue-600"></i>
+                Dados da Carga & Operação
+              </h3>
+              <span class="text-xs font-medium text-slate-500">Parâmetros de Entrada</span>
+            </div>
+
+            <!-- Presets -->
+            <div class="mb-5">
+              <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-2">
+                Simulações Típicas de Mercado:
+              </span>
+              <div class="grid grid-cols-3 gap-2">
+                <button id="preset-bovina"
+                  class="px-2-5 py-1-5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-800 transition-all text-center">
+                  Boi Casado (Resfriado)
+                </button>
+                <button id="preset-frango"
+                  class="px-2-5 py-1-5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-800 transition-all text-center">
+                  Frango Exp. (Congelado)
+                </button>
+                <button id="preset-suino"
+                  class="px-2-5 py-1-5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-800 transition-all text-center">
+                  Suíno (Resfriado)
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Peso Total -->
+              <div>
+                <div class="flex items-center justify-between mb-1-5">
+                  <label for="input-peso" class="text-sm font-semibold text-slate-800 flex items-center gap-1-5">
+                    <i data-lucide="scale" class="w-4 h-4 text-slate-500"></i>
+                    Peso Total da Carga (kg)
+                  </label>
+                  <span id="display-peso" class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0-5 rounded">
+                    25.000 kg
+                  </span>
+                </div>
+                <div class="relative">
+                  <input type="number" id="input-peso" min="100" max="100000" step="500" value="25000"
+                    class="w-full h-11 pl-3 pr-12 rounded-lg border border-slate-300 bg-slate-50/50 text-slate-900 font-semibold text-base focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Ex: 25000">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">KG</span>
+                </div>
+                <div class="mt-1-5">
+                  <input type="range" id="range-peso" min="5000" max="45000" step="500" value="25000"
+                    class="w-full h-1-5 bg-slate-200 rounded-lg cursor-pointer">
+                  <div class="flex justify-between text-[10px] text-slate-400 font-medium mt-0-5">
+                    <span>5.000 kg (VUC)</span>
+                    <span>25.000 kg (Carreta)</span>
+                    <span>45.000 kg (Bitrem)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Valor Médio -->
+              <div>
+                <div class="flex items-center justify-between mb-1-5">
+                  <label for="input-valor" class="text-sm font-semibold text-slate-800 flex items-center gap-1-5">
+                    <i data-lucide="dollar-sign" class="w-4 h-4 text-slate-500"></i>
+                    Valor Médio da Mercadoria por Quilo (R$/kg)
+                  </label>
+                  <span id="display-valor" class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0-5 rounded">
+                    R$ 28,50/kg
+                  </span>
+                </div>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-500">R$</span>
+                  <input type="number" id="input-valor" min="1" max="1000" step="0.5" value="28.5"
+                    class="w-full h-11 pl-10 pr-12 rounded-lg border border-slate-300 bg-slate-50/50 text-slate-900 font-semibold text-base focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Ex: 28.50">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">/KG</span>
+                </div>
+                <div class="mt-1-5">
+                  <input type="range" id="range-valor" min="5" max="60" step="0.5" value="28.5"
+                    class="w-full h-1-5 bg-slate-200 rounded-lg cursor-pointer">
+                  <div class="flex justify-between text-[10px] text-slate-400 font-medium mt-0-5">
+                    <span>R$ 5 (Aves/Miúdos)</span>
+                    <span>R$ 28 (Cortes Nobres)</span>
+                    <span>R$ 60+ (Especiais)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estado da Mercadoria -->
+              <div>
+                <label class="text-sm font-semibold text-slate-800 flex items-center justify-between mb-2">
+                  <span class="flex items-center gap-1-5">
+                    <i data-lucide="snowflake" class="w-4 h-4 text-slate-500"></i>
+                    Estado da Mercadoria
+                  </span>
+                  <span class="text-xs text-slate-500 font-normal">
+                    Selecione o estado de conservação
+                  </span>
+                </label>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <!-- Botão Resfriada -->
+                  <button id="opt-resfriada"
+                    class="flex flex-col items-start p-3 rounded-xl border-2 transition-all text-left border-blue-600 bg-blue-50/80 shadow-xs">
+                    <div class="flex items-center justify-between w-full mb-1">
+                      <span class="flex items-center gap-1-5 text-sm font-bold text-slate-900">
+                        <i data-lucide="droplets" class="w-4 h-4 text-blue-600"></i>
+                        Resfriada
+                      </span>
+                      <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 indicator-check"></i>
+                      <span class="w-3-5 h-3-5 rounded-full border border-slate-300 indicator-circle hidden"></span>
+                    </div>
+                    <span class="text-xs text-slate-600 leading-tight">
+                      Carne in natura (0°C a +4°C). <strong class="text-blue-800 font-semibold">Alta taxa de perda
+                        hídrica</strong>.
+                    </span>
+                  </button>
+
+                  <!-- Botão Congelada -->
+                  <button id="opt-congelada"
+                    class="flex flex-col items-start p-3 rounded-xl border-2 transition-all text-left border-slate-200 bg-white hover:border-slate-300">
+                    <div class="flex items-center justify-between w-full mb-1">
+                      <span class="flex items-center gap-1-5 text-sm font-bold text-slate-900">
+                        <i data-lucide="thermometer-snowflake" class="w-4 h-4 text-slate-400"></i>
+                        Congelada
+                      </span>
+                      <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-600 indicator-check hidden"></i>
+                      <span class="w-3-5 h-3-5 rounded-full border border-slate-300 indicator-circle"></span>
+                    </div>
+                    <span class="text-xs text-slate-600 leading-tight">
+                      Cargas a -18°C. Risco de freezer burn e formação de cristais.
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ROI -->
+            <div class="mt-5 pt-4 border-t border-slate-100">
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <label for="input-custo" class="font-semibold text-slate-600 block mb-1">
+                    Custo Dispositivo ColdTrack
+                  </label>
+                  <div class="relative">
+                    <span class="absolute left-2-5 top-1/2 -translate-y-1/2 text-slate-400 font-medium">R$</span>
+                    <input id="input-custo" type="number" step="100" value="2200"
+                      class="w-full h-8 pl-8 pr-2 rounded border border-slate-200 text-xs font-semibold text-slate-800 bg-slate-50 outline-none focus:border-blue-500">
+                  </div>
+                </div>
+                <div>
+                  <label for="input-viagens" class="font-semibold text-slate-600 block mb-1">
+                    Viagens / Mês por Veículo
+                  </label>
+                  <input id="input-viagens" type="number" min="1" max="100" value="14"
+                    class="w-full h-8 px-2-5 rounded border border-slate-200 text-xs font-semibold text-slate-800 bg-slate-50 outline-none focus:border-blue-500">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumo Instantâneo -->
+          <div class="bg-slate-50 rounded-xl border border-slate-200/80 p-4">
+            <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+              <span class="font-semibold uppercase tracking-wider">Passo 1: Cálculo do Valor Bruto</span>
+              <span id="label-passo1-resumo">25.000 kg &times; R$ 28,50/kg</span>
+            </div>
+            <div class="flex items-baseline justify-between">
+              <span class="text-sm font-bold text-slate-800">Valor Total da Carga:</span>
+              <span id="valor-total-carga" class="text-lg font-extrabold text-slate-900">
+                R$ 712.500,00
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 2: RESULTADOS -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- CARD PRINCIPAL -->
+          <div
+            class="bg-linear-to-br from-emerald-600 via-emerald-700 to-teal-800 text-white rounded-2xl p-6 md:p-7 shadow-lg shadow-emerald-900/15 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-white/5 pointer-events-none blur-xl">
+            </div>
+            <div class="absolute right-6 top-6 opacity-15">
+              <i data-lucide="shield-check" class="w-24 h-24"></i>
+            </div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between gap-2">
+                <span
+                  class="inline-flex items-center gap-1-5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/15 text-emerald-100 backdrop-blur-xs border border-white/20">
+                  <i data-lucide="sparkles" class="w-3-5 h-3-5 text-yellow-300"></i>
+                  Resultado da Mitigação Preditiva
+                </span>
+                <span class="text-xs text-emerald-200 font-medium">Calculado por viagem</span>
+              </div>
+
+              <div class="mt-4">
+                <div class="text-xs md:text-sm font-semibold text-emerald-100 uppercase tracking-wider">
+                  Valor Estimado de Desperdício Evitado
+                </div>
+                <div id="valor-estimado-desperdicio"
+                  class="text-3xl md:text-5xl font-black tracking-tight text-white mt-1">
+                  R$ 99.750,00
+                </div>
+                <p class="text-xs md:text-sm text-emerald-100/90 mt-1 font-medium">
+                  Economia financeira direta assegurada pela prevenção de falha térmica e de dessecação por viagem.
+                </p>
+              </div>
+
+              <div class="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3-5 border border-white/15">
+                  <div class="flex items-center justify-between text-xs text-emerald-200 font-medium mb-1">
+                    <span class="flex items-center gap-1">
+                      <i data-lucide="flame" class="w-3-5 h-3-5 text-amber-300"></i>
+                      Salvo da Quebra Térmica (12%)
+                    </span>
+                  </div>
+                  <div id="valor-salvo-termica" class="text-xl font-bold text-white">
+                    R$ 85.500,00
+                  </div>
+                  <div class="text-[11px] text-emerald-100/80 mt-0-5">
+                    Prevenção de quebra da cadeia do frio
+                  </div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3-5 border border-white/15">
+                  <div class="flex items-center justify-between text-xs text-emerald-200 font-medium mb-1">
+                    <span class="flex items-center gap-1">
+                      <i data-lucide="droplets" class="w-3-5 h-3-5 text-sky-300"></i>
+                      Salvo da Perda de Peso (2%)
+                    </span>
+                  </div>
+                  <div id="valor-salvo-umidade" class="text-xl font-bold text-white">
+                    R$ 14.250,00
+                  </div>
+                  <div id="lbl-peso-evaporado" class="text-[11px] text-emerald-100/80 mt-0-5">
+                    500,0 kg de peso não evaporado
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mt-4 flex flex-wrap items-center justify-between text-xs text-emerald-100 bg-black/15 rounded-lg px-3 py-2 border border-white/10">
+                <span>
+                  Investimento no dispositivo: <strong id="val-investimento">R$ 2.200,00</strong>
+                </span>
+                <span id="val-economia-liquida" class="font-bold text-white">
+                  Economia Líquida na 1ª viagem: +R$ 97.550,00 (45,3x de retorno)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alerta de Carga Resfriada/Congelada -->
+          <div id="alerta-estado-carga">
+            <!-- Renderizado dinamicamente via JS -->
+          </div>
+
+          <!-- Demonstrativo Passo a Passo -->
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
+            <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center justify-between">
+              <span>Demonstrativo da Memória de Cálculo (Passo a Passo)</span>
+              <span class="text-xs font-normal text-slate-500">Regras de Negócio</span>
+            </h4>
+
+            <div class="divide-y divide-slate-100 text-xs">
+              <div class="py-2-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-[11px]">1</span>
+                  <div>
+                    <span class="font-semibold text-slate-800">Valor Total da Carga</span>
+                    <p id="lbl-passo-1" class="text-slate-500">25.000 kg &times; R$ 28,50</p>
+                  </div>
+                </div>
+                <div id="val-passo-1" class="text-right font-bold text-slate-900">
+                  R$ 712.500,00
+                </div>
+              </div>
+
+              <div class="py-2-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-[11px]">2</span>
+                  <div>
+                    <span class="font-semibold text-slate-800">Perda por Quebra da Cadeia do Frio (Térmica)</span>
+                    <p class="text-slate-500">12% fixo sobre o Valor Total da Carga</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div id="val-passo-2" class="font-bold text-amber-700">R$ 85.500,00</div>
+                  <span class="text-[10px] text-slate-400">12,0% do valor bruto</span>
+                </div>
+              </div>
+
+              <div class="py-2-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold flex items-center justify-center text-[11px]">3</span>
+                  <div>
+                    <span class="font-semibold text-slate-800">Perda Física por Desidratação (Umidade)</span>
+                    <p id="lbl-passo-3" class="text-slate-500">2% do peso (500,0 kg) &times; R$ 28,50/kg</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div id="val-passo-3" class="font-bold text-blue-700">R$ 14.250,00</div>
+                  <span class="text-[10px] text-slate-400">2,0% por evaporação hídrica</span>
+                </div>
+              </div>
+
+              <div class="py-3 flex items-center justify-between bg-slate-50/70 -mx-5 px-5 rounded-b-xl">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-[11px]">4</span>
+                  <div>
+                    <span class="font-bold text-slate-900">Total do Desperdício Evitado (Térmica + Umidade)</span>
+                    <p class="text-emerald-700 font-medium">14% de proteção total sobre o lote</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div id="val-passo-4" class="text-base font-black text-emerald-700">
+                    R$ 99.750,00
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projeções de Escala -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-xs">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-semibold text-slate-700 flex items-center gap-1-5">
+                  <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600"></i>
+                  Projeção Mensal (<span id="lbl-proj-mes-viagens">14</span> viagens)
+                </span>
+              </div>
+              <div id="val-proj-mes" class="text-xl font-bold text-slate-900 mt-1">
+                R$ 1.396.500,00
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0-5">
+                Economia acumulada por mês com o dispositivo operando em rota contínua.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-xs">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-semibold text-slate-700 flex items-center gap-1-5">
+                  <i data-lucide="bar-chart-3" class="w-4 h-4 text-blue-600"></i>
+                  Projeção Anual de Proteção
+                </span>
+              </div>
+              <div id="val-proj-ano" class="text-xl font-bold text-blue-700 mt-1">
+                R$ 16.758.000,00
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0-5">
+                Capital total protegido de desperdício invisível em 1 ano de safra/logística.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTEÚDO TELEMETRIA -->
+    <div id="secao-telemetria" class="space-y-6 hidden">
+      <!-- Alerta Preditivo Topo -->
+      <div
+        class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-amber-500 text-white rounded-lg mt-0-5 shrink-0">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span
+                class="text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-200/80 px-2 py-0-5 rounded">
+                Dispositivo Preditivo ColdTrack em Ação
+              </span>
+              <span class="text-xs font-semibold text-slate-700">
+                Veículo DEF-5678 (SP → BH)
+              </span>
+            </div>
+            <p class="text-sm text-amber-950 font-medium mt-1">
+              Alerta Preditivo: Oscilação térmica e queda de UR (74%). Risco de desidratação acelerada detectado em 35
+              min.
+            </p>
+            <p class="text-xs text-amber-800/80 mt-0-5">
+              A intervenção preditiva antes do ponto de quebra evita a perda de 12% da carga e 2% em quebra de água.
+            </p>
+          </div>
+        </div>
+        <button id="btn-calcular-economia"
+          class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-1-5 shrink-0 shadow-xs">
+          Calcular Economia Desta Carga
+          <i data-lucide="arrow-right" class="w-3-5 h-3-5"></i>
+        </button>
+      </div>
+
+      <!-- Cards KPIs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs relative overflow-hidden">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Caminhões em Rota</div>
+          <div class="text-3xl font-extrabold text-slate-900 mt-1">
+            3 <span class="text-sm font-normal text-slate-500">veículos ativos</span>
+          </div>
+          <div class="flex items-center gap-1-5 text-xs text-emerald-700 font-semibold mt-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            100% dos sensores conectados via LTE-M
+          </div>
+          <i data-lucide="truck" class="w-16 h-16 text-slate-100 absolute -right-2 -bottom-2 pointer-events-none"></i>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs relative overflow-hidden">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Alertas Preditivos Ativos</div>
+          <div class="text-3xl font-extrabold text-amber-600 mt-1">
+            1 <span class="text-sm font-normal text-slate-500">sob monitoramento</span>
+          </div>
+          <div class="flex items-center gap-1-5 text-xs text-amber-700 font-semibold mt-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+            DEF-5678: desvio térmico mitigado a tempo
+          </div>
+          <i data-lucide="alert-triangle"
+            class="w-16 h-16 text-amber-50 absolute -right-2 -bottom-2 pointer-events-none"></i>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs relative overflow-hidden">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Temperatura Média da Frota</div>
+          <div class="text-3xl font-extrabold text-slate-900 mt-1">
+            2.9 <span class="text-sm font-normal text-slate-500">°C</span>
+          </div>
+          <div class="flex items-center gap-1-5 text-xs text-emerald-700 font-semibold mt-2">
+            <i data-lucide="check-circle" class="w-3-5 h-3-5 text-emerald-600"></i>
+            Faixa operacional segura (0°C a 4°C)
+          </div>
+          <i data-lucide="thermometer"
+            class="w-16 h-16 text-slate-100 absolute -right-2 -bottom-2 pointer-events-none"></i>
+        </div>
+      </div>
+
+      <!-- Tabela Telemetria -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+        <div
+          class="p-5 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="activity" class="w-5 h-5 text-blue-600"></i>
+              Telemetria dos Veículos com Sensores IoT
+            </h3>
+            <p class="text-xs text-slate-500 mt-0-5">
+              Leituras contínuas de temperatura de carcaça e umidade relativa de ar a cada 15 segundos
+            </p>
+          </div>
+          <span
+            class="inline-flex items-center gap-1-5 text-xs font-medium text-blue-700 bg-blue-50 px-2-5 py-1 rounded-md border border-blue-200">
+            <i data-lucide="radio" class="w-3 h-3 text-blue-600 animate-pulse"></i>
+            Rede LTE-M Online
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead
+              class="bg-slate-50/80 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3-5 px-4">Placa & Dispositivo</th>
+                <th class="py-3-5 px-4">Motorista</th>
+                <th class="py-3-5 px-4">Temperatura</th>
+                <th class="py-3-5 px-4">Umidade Relativa</th>
+                <th class="py-3-5 px-4">Rota / Chegada</th>
+                <th class="py-3-5 px-4">Bateria & Sinal</th>
+                <th class="py-3-5 px-4">Diagnóstico Preditivo</th>
+                <th class="py-3-5 px-4 text-right">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-telemetria-body" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Renderizado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">
+          CT
+        </div>
+        <span class="font-semibold text-slate-700">ColdTrack IoT Logística Preditiva</span>
+        <span>&mdash; Sistema de Mitigação Financeira de Falhas na Cadeia do Frio</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-500 text-[11px]">
+        <span class="flex items-center gap-1">
+          <i data-lucide="snowflake" class="w-3 h-3 text-blue-500"></i>
+          12% Quebra Térmica
+        </span>
+        <span class="flex items-center gap-1">
+          <i data-lucide="droplets" class="w-3 h-3 text-sky-500"></i>
+          2% Desidratação Hídrica
+        </span>
+        <span class="flex items-center gap-1 text-emerald-600 font-semibold">
+          <i data-lucide="shield-check" class="w-3 h-3"></i>
+          14% Desperdício Evitado
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

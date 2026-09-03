@@ -1,0 +1,6 @@
+{
+  "name": "Calculadora de Mitigação de Perdas ColdTrack",
+  "description": "Calculadora financeira de mitigação de perdas logísticas na cadeia do frio com estimativa de desperdício evitado por falha térmica e desidratação.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
