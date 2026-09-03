@@ -2,7 +2,7 @@ CREATE DATABASE SafeMeat;
 
 USE SafeMeat;
 
--- 1. CADASTRO DA EMPRESA / MARCA
+-- 1. CADASTRO DA EMPRESA / MARCA : receber dados da empresa /  marca que vai comprar nosso produto
 
 CREATE TABLE empresa (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -11,10 +11,10 @@ CREATE TABLE empresa (
     cnpj CHAR(14) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefone VARCHAR(15) NOT NULL UNIQUE,
-    data_contratacao DATE NOT NULL
+    data_contratacao DATETIME NOT NULL
 );
 
--- 2. CADASTRO DE USUÁRIOS E ACESSOS
+-- 2. CADASTRO DE USUÁRIOS E ACESSOS : cadastro de usuários da dashboard
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,14 +25,21 @@ CREATE TABLE usuario (
     CONSTRAINT chk_tipo_usuario CHECK (tipo_usuario IN ('Administrador', 'Operador', 'Motorista'))
 );
 
--- 3. CADASTRO DO DESTINO (MERCADO)
+-- 3. CADASTRO DO DESTINO (MERCADO) : cadastro do mercado (usuário final)
 
 CREATE TABLE mercado (
     id INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(100) NOT NULL,
     nome_fantasia VARCHAR(100) NOT NULL,
     cnpj CHAR(14) NOT NULL UNIQUE,
-    telefone VARCHAR(15),
+    telefone VARCHAR(15)
+);
+
+
+-- 4. CADASTRO DE ENDEREÇOS : cadastro de endereço do usuário final
+
+CREATE TABLE endereco (
+	id INT PRIMARY KEY AUTO_INCREMENT,
     cep CHAR(8) NOT NULL,
     logradouro VARCHAR(100) NOT NULL,
     numero INT NOT NULL,
@@ -41,24 +48,24 @@ CREATE TABLE mercado (
     estado CHAR(2) NOT NULL
 );
 
-CREATE TABLE endereco (
-	
-);
-
--- 4. CADASTRO DE PRODUTOS E PARÂMETROS TÉRMICOS *
+-- 5. CADASTRO DE PRODUTOS E PARÂMETROS TÉRMICOS
 
 CREATE TABLE produto (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
+    peso DECIMAL(5,2) NOT NULL,
+    lote CHAR(4) NOT NULL UNIQUE, -- SIF : Serviço de Inspeção Federal
+    tipo_produto VARCHAR(20) NOT NULL CONSTRAINT chk_tipo_produto CHECK (tipo_produto IN('Carne bovina', 'Carne suína', 'Ave', 'Peixe')),
+    quantidade INT NOT NULL,
     temperatura_minima DECIMAL(4,2) NOT NULL,
     temperatura_maxima DECIMAL(4,2) NOT NULL
 );
 
--- 5. AMBIENTES DE MONITORAMENTO (DO ARMAZÉM À GELADEIRA)
+-- 6. AMBIENTES DE MONITORAMENTO (DO ARMAZÉM À GELADEIRA)
 
 CREATE TABLE ambiente_monitorado (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    identificador VARCHAR(50) NOT NULL, -- Ex: 'CAM-01', 'GELADEIRA-MERCADO-02', 'CAMARA-03'
+    identificador VARCHAR(50) NOT NULL, -- EX : 'CAM-01', 'GELADEIRA-MERCADO-02', 'CAMARA-03'
     tipo_ambiente VARCHAR(30) NOT NULL,
     capacidade_kg DECIMAL(10,2),
     status VARCHAR(30) DEFAULT 'Disponível',
@@ -66,7 +73,7 @@ CREATE TABLE ambiente_monitorado (
     CONSTRAINT chk_status_ambiente CHECK (status IN ('Disponível', 'Em Transporte', 'Em Manutenção'))
 );
 
--- 6. REGISTRO DE OPERAÇÕES DE TRANSPORTE
+-- 7. REGISTRO DE OPERAÇÕES DE TRANSPORTE : Informações do transporte / motorista
 
 CREATE TABLE transporte (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -80,7 +87,7 @@ CREATE TABLE transporte (
     CONSTRAINT chk_status_viagem CHECK (status_viagem IN('Em Trânsito', 'Concluído'))
 );
 
--- 7. DISPOSITIVO SENSOR (HARDWARE)
+-- 8. DISPOSITIVO SENSOR (HARDWARE) : informações do nosso sensor
 
 CREATE TABLE sensor (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -90,7 +97,7 @@ CREATE TABLE sensor (
     ativo TINYINT(1) DEFAULT 0
 );
 
--- 8. DADOS E LEITURA COLETADOS PELOS SENSORES
+-- 9. DADOS E LEITURA COLETADOS PELOS SENSORES : dados recebidos pelo sensor
 
 CREATE TABLE leitura_sensor (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -101,7 +108,7 @@ CREATE TABLE leitura_sensor (
     longitude DECIMAL(11,8)
 );
 
--- 9. HISTÓRICO DE ALERTAS (QUEBRA DA CADEIA DO FRIO)
+-- 10. HISTÓRICO DE ALERTAS (QUEBRA DA CADEIA DO FRIO) : dados capturados pelo sensor
 
 CREATE TABLE alerta (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -111,3 +118,8 @@ CREATE TABLE alerta (
     mensagem VARCHAR(255) NOT NULL,
     CONSTRAINT chk_severidade CHECK (nivel_severidade IN ('Alerta Amarelo', 'Crítico - Quebra de Frio'))
 );
+
+-- INSERÇÃO DE DADOS
+
+INSERT INTO empresa (razao_social, nome_fantasia, cnpj, email, telefone, data_contratacao) VALUES
+	('JBS S/A', 'Friboi', '02916265000108', 'sac@jbs.com.br', '0800 771 2221', NOW());
