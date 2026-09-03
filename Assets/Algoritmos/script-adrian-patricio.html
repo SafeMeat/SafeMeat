@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador financeiro</title>
+    <style>
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .form__campo,
+      .form__input {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h3 class="main__title">Simulador financeiro</h3>
+
+      <h4 class="main__subtitle">custo invisivel do frio</h4>
+
+      <form>
+        <div class="form__campo">
+          <label for="ipt_pesoDaCarga">Peso da carga (KG)</label>
+          <label for="ipt_valorKG">Valor do KG</label>
+          <label for="ipt_custoSensor">Custo do sensor IoT (R$)</label>
+        </div>
+
+        <div class="form__input">
+          <input type="text" id="ipt_valorKG" />
+          <input type="text" id="ipt_pesoDaCarga" />
+          <input type="text" id="ipt_custoSensor" />
+        </div>
+      </form>
+
+      <button onclick="calcular()">CALCULAR</button>
+
+      <span id="msg"></span>
+    </main>
+  </body>
+</html>
+
+<script>
+    function calcular() {
+    let pesoDaCarga = Number(ipt_pesoDaCarga.value);
+    let custoSensor = Number(ipt_custoSensor.value);
+    let valorKG = Number(ipt_valorKG.value);
+    let porcentPerdaPeso = 0.02;
+    let porcentRiscoRejeicao = 0.01;
+    let reducao = 0.8;
+
+    let valorCarga = pesoDaCarga * valorKG;
+
+    let prejuizoPerda = valorCarga * porcentPerdaPeso;
+
+    let prejuizoRejeicao = valorCarga * porcentRiscoRejeicao;
+
+    let prejuizoTotal = prejuizoPerda + prejuizoRejeicao;
+
+    let prejuizoEvitado = prejuizoTotal * reducao;
+
+    let prejuizoRestante = prejuizoTotal - prejuizoEvitado;
+
+    let economiaReal = prejuizoEvitado - custoSensor;
+
+    if (economiaReal > 0) {
+        msg.innerHTML += 'ação vantajosa<br>';
+    } else if (economiaReal == 0) {
+        msg.innerHTML += 'ação se paga<br>';
+    } else {
+        msg.innerHTML += 'ação não compensa<br>';
+    }
+
+    msg.innerHTML += `
+        VALOR DA CARGA: ${valorCarga}<br>
+        PREJUÍZO TOTAL: ${prejuizoTotal}<br>
+        PREJUÍZO RESTANTE: ${prejuizoRestante}<br>
+        CUSTO DA AÇÃO: R$${custoSensor}<br>
+        ECONOMIA REAL: ${economiaReal}`;
+}
+</script>
