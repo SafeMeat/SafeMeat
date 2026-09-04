@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor de Cálculo Simples</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; }
+        .box { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        .result { font-size: 18px; font-weight: bold; color: #2563eb; }
+        .alerta { color: #dc2626; font-size: 14px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Testador Lógico - Calculadora</h2>
+
+    <!-- Entradas HTML Simples -->
+    <div class="box">
+        <label>Peso Total (kg): <input type="number" id="inputPeso" value="25000"></label><br><br>
+        <label>Valor Médio (R$): <input type="number" id="inputValor" value="28.50"></label><br><br>
+        
+        <label>Estado da Carga:</label>
+        <select id="inputEstado">
+            <option value="resfriada">Resfriada</option>
+            <option value="congelada">Congelada</option>
+        </select><br><br>
+
+        <button onclick="executarCalculo()">Calcular Perdas</button>
+    </div>
+
+    <!-- Saídas HTML -->
+    <div class="box">
+        <p>Valor Total da Carga: R$ <span id="outValorTotal" class="result">0.00</span></p>
+        <p>Perda Térmica (12%): R$ <span id="outPerdaTermica" class="result">0.00</span></p>
+        <p>Perda por Umidade (2%): R$ <span id="outPerdaUmidade" class="result">0.00</span></p>
+        <hr>
+        <p>Total Evitado: R$ <span id="outTotalEvitado" class="result">0.00</span></p>
+        <div id="msgAlerta" class="alerta"></div>
+    </div>
+
+    <!-- SCRIPT DE LÓGICA ISOLADA -->
+    <script>
+        function executarCalculo() {
+            // 1. Criação de variáveis e captura de dados
+            let peso = Number(inputPeso.value);
+            let valorKilo = Number(inputValor.value);
+            let estado = inputEstado.value;
+
+            // Variáveis fixas das regras de negócio
+            let taxaTermica = 0.12; // 12%
+            let taxaUmidade = 0.02; // 2%
+
+            // 2. Operações Aritméticas Básicas
+            let valorTotalCarga = peso * valorKilo;
+            
+            let calculoPerdaTermica = valorTotalCarga * taxaTermica;
+            
+            let pesoPerdidoEvaporacao = peso * taxaUmidade;
+            let calculoPerdaUmidade = pesoPerdidoEvaporacao * valorKilo;
+            
+            let totalDesperdicioEvitado = calculoPerdaTermica + calculoPerdaUmidade;
+
+            // 3. Condicional Simples (If/Else)
+            let mensagemEstado = "";
+            if (estado === "resfriada") {
+                mensagemEstado = "Cuidado: Carga resfriada tem alta evaporação. A perda de água na balança gera prejuízo direto.";
+            } else {
+                mensagemEstado = "Carga congelada. O peso varia menos, mas o risco de queima por frio persiste.";
+            }
+
+            // 4. Inserção no HTML via innerHTML
+            outValorTotal.innerHTML = valorTotalCarga.toFixed(2);
+            outPerdaTermica.innerHTML = calculoPerdaTermica.toFixed(2);
+            outPerdaUmidade.innerHTML = calculoPerdaUmidade.toFixed(2);
+            outTotalEvitado.innerHTML = totalDesperdicioEvitado.toFixed(2);
+            msgAlerta.innerHTML = mensagemEstado;
+        }
+    </script>
+</body>
+</html>
