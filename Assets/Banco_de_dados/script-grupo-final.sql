@@ -255,3 +255,47 @@ INSERT INTO SafeMeat.alerta (
     (4.20, '2026-09-04 09:15:00', 'Alerta Amarelo', 'Temperatura próxima ao limite máximo tolerado (4.00°C).'),
     (7.80, '2026-09-04 10:00:00', 'Crítico - Quebra de Frio', 'Limite seguro ultrapassado. Risco iminente de deterioração de carga resfriada.'),
     (4.10, '2026-09-04 10:20:00', 'Alerta Amarelo', 'Oscilação térmica detectada na câmara frigorífica.');
+    
+
+
+-- CONSULTA DE DADOS NAS TABELAS DESENVOLVIDAS --
+
+-- EMPRESA
+
+SELECT * FROM SafeMeat.empresa;
+
+-- USUÁRIO
+
+SELECT * FROM SafeMeat.usuario;
+
+-- MERCADO
+
+SELECT * FROM SafeMeat.mercado;
+    
+-- ENDEREÇO
+
+SELECT * FROM SafeMeat.endereco;
+    
+-- PRODUTO
+
+SELECT * FROM SafeMeat.produto;
+
+-- AMBIENTE MONITORADO
+
+SELECT * FROM SafeMeat.ambiente_monitorado;
+    
+-- TRANSPORTE
+
+SELECT * FROM SafeMeat.transporte;
+    
+-- SENSOR
+
+SELECT * FROM SafeMeat.sensor;
+    
+-- LEITURA SENSOR
+
+SELECT * FROM SafeMeat.leitura_sensor;
+    
+-- ALERTA
+
+SELECT * FROM SafeMeat.alerta;
