@@ -8,7 +8,7 @@ CREATE TABLE empresa (
     id INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(100) NOT NULL,
     nome_fantasia VARCHAR(100) NOT NULL,
-    cnpj CHAR(14) NOT NULL UNIQUE,
+    cnpj CHAR(18) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefone VARCHAR(15) NOT NULL UNIQUE,
     data_contratacao DATETIME NOT NULL
@@ -31,7 +31,7 @@ CREATE TABLE mercado (
     id INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(100) NOT NULL,
     nome_fantasia VARCHAR(100) NOT NULL,
-    cnpj CHAR(14) NOT NULL UNIQUE,
+    cnpj CHAR(18) NOT NULL UNIQUE,
     telefone VARCHAR(15)
 );
 
@@ -121,5 +121,19 @@ CREATE TABLE alerta (
 
 -- INSERÇÃO DE DADOS
 
+-- EMPRESA
 INSERT INTO empresa (razao_social, nome_fantasia, cnpj, email, telefone, data_contratacao) VALUES
-	('JBS S/A', 'Friboi', '02916265000108', 'sac@jbs.com.br', '0800 771 2221', NOW());
+	('JBS S/A', 'Friboi', '02916265000108', 'friboi@friboi.com.br', '0800-771-2221', NOW()),
+    ('Swift Armour S.A. Indústria e Comércio', 'Swift', '60.713.823/0001-96', 'swift@swift.com.br', '0800-400-2892', NOW());
+    
+-- USUÁRIO
+INSERT INTO usuario (nome, email, senha, tipo_usuario) VALUES
+	('Adrian', 'adrian@safemeat.com', '12345678', 'Administrador'),
+	('Gabriel', 'gabriel@friboi.com', '12345678', 'Operador'),
+	('Brian', 'brian@swift.com', '12345678', 'Motorista'),
+	('Dayvid', 'dayvid@friboi.com', '12345678', DEFAULT); -- VALOR DEFAULT tipo_usuario = Operador
+
+-- MERCADO
+INSERT INTO mercado (razao_social, nome_fantasia, cnpj, telefone) VALUES
+	('Carrefour Comercio e industria LTDA', 'Carrefour', '45.543.915/0001-81', '0800-718-2222'),
+	('Sendas Distribuidora S/A', 'Assaí Atacadista', '06.057.223/0001-71', '0800-773-2322');
