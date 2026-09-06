@@ -9,6 +9,10 @@
         .box { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
         .result { font-size: 18px; font-weight: bold; color: #2563eb; }
         .alerta { color: #dc2626; font-size: 14px; margin-top: 5px; }
+        .tabelaTemp{ text-align: center; border: 1px solid #ccc; border-radius: 5px;}
+        .tabelaTemp h2 {color: #2563eb}
+        .tabelaTemp span {color: #2563eb; font-weight: 700;}
+        .fonte{ color: #525151;}
     </style>
 </head>
 <body>
@@ -28,7 +32,7 @@
 
         <button onclick="executarCalculo()">Calcular Perdas</button>
     </div>
-
+    
     <!-- Saídas HTML -->
     <div class="box">
         <p>Valor Total da Carga: R$ <span id="outValorTotal" class="result">0.00</span></p>
@@ -39,6 +43,15 @@
         <div id="msgAlerta" class="alerta"></div>
     </div>
 
+    <div class="tabelaTemp">
+        <h2>Temperatura Ideal</h2>
+        <p>Carne Bovina: <span>0 a 4 °C</span></p>
+        <p>Carne Suína: <span>0 a 7 °C</span></p>
+        <p>Frango: <span>0 a 4 °C</span></p>
+        <p>Peixe: <span>0 a 2 °C</span> (idealmente próximo de 0 °C)</p>
+        <p class="fonte">( Prefeitura de São Paulo — fonte oficial )</p>
+    </div>
+    
     <!-- SCRIPT DE LÓGICA ISOLADA -->
     <script>
         function executarCalculo() {
