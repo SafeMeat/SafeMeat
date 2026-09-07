@@ -41,7 +41,7 @@
     </style>
 </head>
 
-<body onload="selecionarCarne()">
+<body>
 
     <h2>SafeMeat — Calculadora de Impacto</h2>
 
@@ -58,12 +58,10 @@
         </select><br><br>
 
         <label>Peso total (kg):</label><br>
-        <input id="inputPeso" type="number"
-               min="0" step="0.01" value="25000"><br><br>
+        <input id="inputPeso" type="number" value="25000"><br><br>
 
         <label>Preço por kg (R$):</label><br>
-        <input id="inputPreco" type="number"
-               min="0" step="0.01">
+        <input id="inputPreco" type="number" value="20">
 
         <p class="fonte">
             Preço preenchido como exemplo de teste.
@@ -76,8 +74,7 @@
             (pontos percentuais):
         </label><br>
 
-        <input id="inputReducao" type="number"
-               min="0" step="0.1" value="1">
+        <input id="inputReducao" type="number" value="1">
 
         <p class="fonte">
             Reduzir de 12% para 11% corresponde a
