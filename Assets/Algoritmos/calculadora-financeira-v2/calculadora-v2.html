@@ -48,6 +48,7 @@
     <div class="box">
         <label>Produto:</label><br>
         <select id="inputCarne" onchange="selecionarCarne()">
+            <option selected disabled>Selecione uma opção</option>
             <option value="bovina">Carne bovina — cortes</option>
             <option value="suina">Carne suína — cortes</option>
             <option value="frango">Frango</option>
@@ -58,10 +59,10 @@
         </select><br><br>
 
         <label>Peso total (kg):</label><br>
-        <input id="inputPeso" type="number" value="25000"><br><br>
+        <input id="inputPeso" type="number"><br><br>
 
         <label>Preço por kg (R$):</label><br>
-        <input id="inputPreco" type="number" value="20">
+        <input id="inputPreco" type="number">
 
         <p class="fonte">
             Preço preenchido como exemplo de teste.
