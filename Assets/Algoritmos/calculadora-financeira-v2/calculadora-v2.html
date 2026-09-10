@@ -185,13 +185,14 @@
             let carne = inputCarne.value;
             let peso = Number(inputPeso.value);
             let preco = Number(inputPreco.value);
-            let reducao = Number(inputReducao.value);
-
+            
             let taxaPerda = 12;
-
+            
             if (carne == "carcaca") {
                 taxaPerda = 2;
             }
+            
+            let reducao = (Number(inputReducao.value) / 100) * 12;
 
             msgErro.innerHTML = "";
             outResultado.innerHTML = "";
