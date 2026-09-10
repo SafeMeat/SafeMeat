@@ -97,6 +97,7 @@ CREATE TABLE SafeMeat.sensor (
     ativo TINYINT DEFAULT 0
 );
 
+
 -- 9. DADOS E LEITURA COLETADOS PELOS SENSORES : dados recebidos pelo sensor
 
 CREATE TABLE SafeMeat.leitura_sensor (
@@ -118,6 +119,7 @@ CREATE TABLE SafeMeat.alerta (
     mensagem VARCHAR(255) NOT NULL,
     CONSTRAINT chk_severidade CHECK (nivel_severidade IN ('Alerta Amarelo', 'Crítico - Quebra de Frio'))
 );
+
 
 
 
@@ -260,6 +262,21 @@ INSERT INTO SafeMeat.alerta (
 
 -- CONSULTA DE DADOS NAS TABELAS DESENVOLVIDAS --
 
+-- SENSOR
+
+SELECT 
+	CONCAT('[AVISO] ', mensagem,' ',temperatura_registrada,'°C registrado em ', data_hora) 'Alerta registrado' 
+FROM SafeMeat.alerta;
+
+
+SELECT 
+	CONCAT('O sensor ', modelo, ' com o número de série ', numero_serie,' foi instalado em ', data_instalacao) 'Informações sobre o Sensor',
+    CASE
+		WHEN ativo = 1 THEN 'ativo'
+        ELSE 'desligado'
+    END 'Status'
+FROM SafeMeat.sensor;
+
 -- EMPRESA
 
 SELECT * FROM SafeMeat.empresa;
@@ -287,10 +304,6 @@ SELECT * FROM SafeMeat.ambiente_monitorado;
 -- TRANSPORTE
 
 SELECT * FROM SafeMeat.transporte;
-    
--- SENSOR
-
-SELECT * FROM SafeMeat.sensor;
     
 -- LEITURA SENSOR
 

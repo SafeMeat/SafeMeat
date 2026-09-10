@@ -15,11 +15,11 @@ void setup() {
   Serial.print(4);
   Serial.print(" ");
   Serial.print("Temperatura:");
-  Serial.print(temperatura - 23);
+  Serial.print(temperatura - 21);
   Serial.print(" ");
   Serial.print("TempMinimo:");
   Serial.println(0);
 
-  delay(2000);
+  delay(1000);
 }
 
