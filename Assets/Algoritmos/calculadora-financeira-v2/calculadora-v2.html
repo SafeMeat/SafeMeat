@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Calculadora SafeMeat</title>
 
     <style>
@@ -201,13 +201,14 @@
             let carne = inputCarne.value;
             let peso = Number(inputPeso.value);
             let preco = Number(inputPreco.value);
-            let reducao = Number(inputReducao.value);
 
             let taxaPerda = 12;
 
             if (carne == "carcaca") {
                 taxaPerda = 2;
             }
+
+            let reducao = (Number(inputReducao.value) / 100) * 12;
 
             msgErro.innerHTML = "";
             outResultado.innerHTML = "";
@@ -222,7 +223,7 @@
                 msgErro.innerHTML =
                     "Peso e preço devem ser maiores que zero.";
 
-            } else if (reducao < 0 || reducao > taxaPerda) {
+            } else if (reducao < 0 || reducao > 100) {
 
                 msgErro.innerHTML =
                     "A redução deve estar entre 0 e " +
@@ -271,9 +272,6 @@
 
                     "<p>Peso preservado: " +
                     pesoPreservado.toFixed(2) + " kg</p>" +
-
-                    "<p>Prejuízo restante: R$ " +
-                    prejuizoFinal.toFixed(2) + "</p>" +
 
                     "<p class='result'>Economia hipotética: R$ " +
                     economia.toFixed(2) + "</p>" +
@@ -443,128 +441,7 @@
     </div>
 
     <script>
-        // Função 1: selecionar produto e preencher preço de exemplo.
-        function selecionarCarne() {
-            let carne = inputCarne.value;
-
-            if (carne == "bovina") {
-                inputPreco.value = 28.50;
-            } else if (carne == "suina") {
-                inputPreco.value = 18;
-            } else if (carne == "frango") {
-                inputPreco.value = 10;
-            } else if (carne == "peixe") {
-                inputPreco.value = 25;
-            } else {
-                inputPreco.value = 20;
-            }
-
-            if (carne == "carcaca") {
-                outReferencia.innerHTML =
-                    "Cenário de perda de peso: 2% em 24 horas " +
-                    "de resfriamento inicial de carcaças bovinas. " +
-                    "A IAGRO relata valores entre 0,40% e 2,23%. " +
-                    "Inclui evaporação, gotejamento e exsudação. " +
-                    "Não é uma perda totalmente evitável.";
-            } else {
-                outReferencia.innerHTML =
-                    "Cenário ilustrativo de perda: 12%. " +
-                    "Referência da IIR para alimentos produzidos " +
-                    "globalmente em 2017 e perdidos por " +
-                    "insuficiência da cadeia do frio. " +
-                    "Não é uma taxa específica deste tipo de carne.";
-            }
-
-            outResultado.innerHTML =
-                "Clique em calcular para atualizar o resultado.";
-
-            msgErro.innerHTML = "";
-        }
-
-        // Função 2: calcular perdas e economia hipotética.
-        function calcular() {
-            let carne = inputCarne.value;
-            let peso = Number(inputPeso.value);
-            let preco = Number(inputPreco.value);
-            let reducao = (Number(inputReducao.value) / 100) * 12;
-
-            let taxaPerda = 12;
-
-            if (carne == "carcaca") {
-                taxaPerda = 2;
-            }
-
-            msgErro.innerHTML = "";
-            outResultado.innerHTML = "";
-
-            if (inputPeso.value == "" || inputPreco.value == "" ||
-                inputReducao.value == "") {
-
-                msgErro.innerHTML = "Preencha todos os campos.";
-
-            } else if (peso <= 0 || preco <= 0) {
-
-                msgErro.innerHTML =
-                    "Peso e preço devem ser maiores que zero.";
-
-            } else if (reducao < 0 || reducao > 100) {
-
-                msgErro.innerHTML =
-                    "A redução deve estar entre 0 e " +
-                    taxaPerda + " pontos percentuais.";
-
-            } else {
-                // Valor financeiro da carga.
-                let valorCarga = peso * preco;
-
-                // Perda no cenário de referência.
-                let pesoPerdido = peso * taxaPerda / 100;
-                let prejuizo = pesoPerdido * preco;
-
-                // Perda após a melhoria hipotética.
-                let taxaFinal = taxaPerda - reducao;
-                let pesoPerdidoFinal = peso * taxaFinal / 100;
-                let prejuizoFinal = pesoPerdidoFinal * preco;
-
-                // Diferença entre os dois cenários.
-                let pesoPreservado = pesoPerdido - pesoPerdidoFinal;
-                let economia = prejuizo - prejuizoFinal;
-
-                // Quanto vale cada ponto percentual da carga.
-                let valorPonto = valorCarga / 100;
-
-                outResultado.innerHTML =
-                    "<p>Valor da carga: R$ " +
-                    valorCarga.toFixed(2) + "</p>" +
-
-                    "<p>Perda de referência: " +
-                    taxaPerda + "% — " +
-                    pesoPerdido.toFixed(2) + " kg</p>" +
-
-                    "<p>Prejuízo nesse cenário: R$ " +
-                    prejuizo.toFixed(2) + "</p>" +
-
-                    "<hr>" +
-
-                    "<p>Cada ponto percentual de perda " +
-                    "corresponde a <strong>R$ " +
-                    valorPonto.toFixed(2) + "</strong>.</p>" +
-
-                    "<p>Se a taxa cair de " +
-                    taxaPerda + "% para " +
-                    taxaFinal.toFixed(2) + "%:</p>" +
-
-                    "<p>Peso preservado: " +
-                    pesoPreservado.toFixed(2) + " kg</p>" +
-
-                    "<p class='result'>Economia hipotética: R$ " +
-                    economia.toFixed(2) + "</p>" +
-
-                    "<p class='fonte'>Comparação de cenários. " +
-                    "Não representa economia garantida " +
-                    "pelo dispositivo.</p>";
-            }
-        }
+        
     </script>
 </body>
 </html> -->
